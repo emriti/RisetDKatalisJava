@@ -10,7 +10,7 @@ import com.dkatalis.parkinglot.entity.ParkingEntity;
 public class ParkingRepository extends Repository<ParkingEntity> {
 
 	private LinkedHashMap<Integer, ParkingEntity> data;
-
+	// TODO: check capacity when adding data
 	public ParkingRepository() {
 		data = new LinkedHashMap<Integer, ParkingEntity>();
 	}
@@ -33,6 +33,11 @@ public class ParkingRepository extends Repository<ParkingEntity> {
 		}
 	}
 
+	public ParkingEntity add(String registrationNo) throws Exception {
+		ParkingEntity newParking = new ParkingEntity(registrationNo);
+		return add(newParking);
+	}
+	
 	@Override
 	public ParkingEntity add(ParkingEntity item) throws Exception {
 		// check if data exists
