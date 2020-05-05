@@ -17,11 +17,11 @@ public class GetAllTest extends TestCase {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
-		suite.addTest(new GetAllTest("getAll"));
+		suite.addTest(new GetAllTest("checkDataSize"));
 		return suite;
 	}
 
-	public void getAll() {
+	public void checkDataSize() {
 		try {
 			ParkingRepository repo = new ParkingRepository(1);
 			repo.add(new ParkingEntity("1"));
