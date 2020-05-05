@@ -8,6 +8,7 @@ public class Constants {
 		public static final String LEAVE = "leave";
 		public static final String STATUS = "status";
 		public static final String HELP = "help";
-		public static final String ALL = "help";	
+		public static final String ALL = "help";
+		public static final String EXIT = "exit";
 	}
 }

@@ -33,6 +33,7 @@ public class ParkingService {
 
 	public ParkingServiceDTO remove(String registrationNo, int hours) {
 		ParkingServiceDTO dto = new ParkingServiceDTO();
+		dto.addNewMessage("registrationNo", registrationNo);
 		try {
 			ParkingEntity parkingEntity = repo.deleteByRegistrationNo(registrationNo);
 			dto.addNewMessage("slotNo", parkingEntity.getSlotNo());

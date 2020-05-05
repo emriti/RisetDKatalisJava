@@ -10,7 +10,7 @@ import com.dkatalis.parkinglot.entity.ParkingEntity;
 public class ParkingRepository extends Repository<ParkingEntity> {
 
 	private LinkedHashMap<Integer, ParkingEntity> data;
-	// TODO: check capacity when adding data
+
 	public ParkingRepository() {
 		data = new LinkedHashMap<Integer, ParkingEntity>();
 	}
@@ -22,12 +22,19 @@ public class ParkingRepository extends Repository<ParkingEntity> {
 
 	@Override
 	public void resize(int capacity) {
+		// shrinking lot
 		if (!data.isEmpty() && capacity < data.size()) {
 			for (int i = capacity + 1; i <= data.size(); i++) {
 				data.remove(i);
 			}
+			// initialize empty lot
 		} else if (data.isEmpty()) {
 			for (int i = 1; i <= capacity; i++) {
+				data.put(i, null);
+			}
+			// resize lot
+		} else if (capacity > data.size()) {
+			for (int i = data.size() + 1; i <= capacity; i++) {
 				data.put(i, null);
 			}
 		}
@@ -37,7 +44,7 @@ public class ParkingRepository extends Repository<ParkingEntity> {
 		ParkingEntity newParking = new ParkingEntity(registrationNo);
 		return add(newParking);
 	}
-	
+
 	@Override
 	public ParkingEntity add(ParkingEntity item) throws Exception {
 		// check if data exists
@@ -50,7 +57,7 @@ public class ParkingRepository extends Repository<ParkingEntity> {
 				data.put(emptySlot, item);
 				return item;
 			} else {
-				throw new Exception("Sorry, parking lot is full");	
+				throw new Exception("Sorry, parking lot is full");
 			}
 		} else {
 			throw new Exception("Data has already exists!");
@@ -62,7 +69,7 @@ public class ParkingRepository extends Repository<ParkingEntity> {
 		// delete if exists
 		if (id > 0) {
 			ParkingEntity item = data.get(id);
-			data.remove(id);
+			data.put(id, null);
 			return item;
 		} else {
 			throw new Exception("Data not found!");

@@ -13,11 +13,32 @@ import com.dkatalis.parkinglot.service.ParkingService;
 
 public class App {
 
-	private static ParkingService svc;
+	private static ParkingService svc = new ParkingService();
 
 	public static void main(String[] args) {
+		run(args);
+//		runningApp("park --help");
+//		runningApp("create_parking_lot 6");
+//		runningApp("park KA-01-HH-1234");
+//		runningApp("park KA-01-HH-9999");
+//		runningApp("park KA-01-BB-0001");
+//		runningApp("park KA-01-HH-7777");
+//		runningApp("park KA-01-HH-2701");
+//		runningApp("park KA-01-HH-3141");
+//		runningApp("leave KA-01-HH-3141 4");
+//		runningApp("status");
+//		runningApp("park KA-01-P-333");
+//		runningApp("park DL-12-AA-9999");
+//		runningApp("leave KA-01-HH-1234 4");
+//		runningApp("leave KA-01-BB-0001 6");
+//		runningApp("leave DL-12-AA-9999 2");
+//		runningApp("park KA-09-HH-0987");
+//		runningApp("park CA-09-IO-1111");
+//		runningApp("park KA-09-HH-0123");
+//		runningApp("status");
+	}
 
-		svc = new ParkingService();
+	private static void run(String[] args) {
 
 		if (args.length > 0) {
 			// get command
@@ -28,7 +49,7 @@ public class App {
 				try (BufferedReader br = new BufferedReader(new FileReader(cmd1))) {
 					String line;
 					while ((line = br.readLine()) != null) {
-						RunningApp(line);
+						runningApp(line);
 					}
 				} catch (FileNotFoundException e) {
 					System.out.println("File not found!");
@@ -40,19 +61,19 @@ public class App {
 			// run interactively
 			while (true) {
 				String input = System.console().readLine();
-				RunningApp(input);
+				runningApp(input);
 			}
 		}
 
 	}
 
-	private static void RunningApp(String input) {
+	private static void runningApp(String input) {
 		if (input.trim() != "") {
 
 			String[] inputs = input.split(" ");
 
 			if (inputs.length == 2) {
-				if (inputs[1].toLowerCase() == "--help") {
+				if (inputs[1].toLowerCase().equals("--help")) {
 					GenerateHelp(inputs[0].toLowerCase());
 					return;
 				}
@@ -89,9 +110,10 @@ public class App {
 
 				dto = svc.park(inputs[1]);
 				if (dto.getMessages().containsKey("errorMsg")) {
-					System.out.println(dto.getMessages().get("errorMsg"));
+					System.out.println(dto.getMessages().get("errorMsg").toString());
 				} else {
-					System.out.println(String.format("Allocated slot number: %d", dto.getMessages().get("slotNo")));
+					System.out.println(
+							String.format("Allocated slot number: %s", dto.getMessages().get("slotNo").toString()));
 				}
 				break;
 
@@ -112,12 +134,18 @@ public class App {
 
 				dto = svc.remove(inputs[1], hours);
 				if (dto.getMessages().containsKey("errorMsg")) {
-					System.out.println(dto.getMessages().get("errorMsg"));
+					if (dto.getMessages().get("errorMsg").toString().equals("Data not found!")) {
+						System.out.println(String.format("Registration number %s not found",
+								dto.getMessages().get("registrationNo").toString()));
+					} else {
+						System.out.println(dto.getMessages().get("errorMsg"));
+					}
+
 				} else {
-					System.out
-							.println(String.format("Registration number %s with Slot Number %d is free with Charge %d",
-									dto.getMessages().get("registrationNo"), dto.getMessages().get("slotNo"),
-									dto.getMessages().get("charge")));
+					System.out.println(String.format(
+							"Registration number %s with Slot Number %s is free with Charge %s",
+							dto.getMessages().get("registrationNo").toString(),
+							dto.getMessages().get("slotNo").toString(), dto.getMessages().get("charge").toString()));
 				}
 
 				break;
@@ -128,11 +156,20 @@ public class App {
 					break;
 				}
 
+				System.out.println("Slot No.\tRegistration No");
 				List<ParkingEntity> list = svc.getStatus();
-				
+				for (ParkingEntity parkingEntity : list) {
+					if (parkingEntity != null) {
+						System.out.println(String.format("%s\t\t%s", parkingEntity.getSlotNo(),
+								parkingEntity.getRegistrationNo()));
+					}
+				}
 				break;
 			case Constants.Commands.HELP:
 				GenerateHelp(Constants.Commands.ALL);
+				break;
+			case Constants.Commands.EXIT:
+				System.exit(0);
 				break;
 			default:
 				GenerateCommandError();
@@ -170,7 +207,7 @@ public class App {
 			result = "status";
 			break;
 		case Constants.Commands.ALL:
-			result = "commands available: create_parking_lot, park, leave, status, registration_numbers_for_cars_with_colour, slot_numbers_for_cars_with_colour, slot_number_for_registration_number";
+			result = "commands available: create_parking_lot, park, leave, status";
 			break;
 		}
 		System.out.println(String.format("%s\n", result));

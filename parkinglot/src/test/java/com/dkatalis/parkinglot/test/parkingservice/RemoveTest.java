@@ -28,7 +28,7 @@ public class RemoveTest extends TestCase {
 		svc.park("1");
 		svc.remove("1", 1);
 		List<ParkingEntity> list = svc.getStatus();
-		assertTrue(list.size() == 0);
+		assertTrue(list.get(0) == null);
 	}
 
 	public void dataNotFound() {
