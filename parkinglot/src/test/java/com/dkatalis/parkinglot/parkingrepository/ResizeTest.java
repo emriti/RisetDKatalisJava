@@ -2,7 +2,7 @@ package com.dkatalis.parkinglot.parkingrepository;
 
 import java.util.List;
 
-import com.dkatalis.parkinglot.entity.Parking;
+import com.dkatalis.parkinglot.entity.ParkingEntity;
 import com.dkatalis.parkinglot.repository.ParkingRepository;
 
 import junit.framework.Test;
@@ -25,7 +25,7 @@ public class ResizeTest extends TestCase {
 	public void checkDataSizeAfterInitialization() {
 		try {
 			ParkingRepository repo = new ParkingRepository(1);
-			List<Parking> list = repo.getAll();
+			List<ParkingEntity> list = repo.getAll();
 			assertTrue(list.size() == 1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,7 +36,7 @@ public class ResizeTest extends TestCase {
 		try {
 			ParkingRepository repo = new ParkingRepository(3);
 			repo.resize(2);
-			List<Parking> list = repo.getAll();
+			List<ParkingEntity> list = repo.getAll();
 			assertTrue(list.size() == 2);
 		} catch (Exception e) {
 			e.printStackTrace();

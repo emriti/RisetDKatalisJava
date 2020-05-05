@@ -1,6 +1,6 @@
 package com.dkatalis.parkinglot.parkingrepository;
 
-import com.dkatalis.parkinglot.entity.Parking;
+import com.dkatalis.parkinglot.entity.ParkingEntity;
 import com.dkatalis.parkinglot.repository.ParkingRepository;
 
 import junit.framework.Test;
@@ -34,8 +34,8 @@ public class DeleteByRegistrationNoTest extends TestCase {
 	public void dataDeleted() {
 		try {
 			ParkingRepository repo = new ParkingRepository(1);
-			repo.add(new Parking("1"));
-			Parking savedData = repo.deleteByRegistrationNo("1");
+			repo.add(new ParkingEntity("1"));
+			ParkingEntity savedData = repo.deleteByRegistrationNo("1");
 			assertTrue(savedData.getRegistrationNo().equals("1"));
 		} catch (Exception e) {
 			e.printStackTrace();

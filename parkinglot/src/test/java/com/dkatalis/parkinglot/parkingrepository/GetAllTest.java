@@ -2,7 +2,7 @@ package com.dkatalis.parkinglot.parkingrepository;
 
 import java.util.List;
 
-import com.dkatalis.parkinglot.entity.Parking;
+import com.dkatalis.parkinglot.entity.ParkingEntity;
 import com.dkatalis.parkinglot.repository.ParkingRepository;
 
 import junit.framework.Test;
@@ -24,8 +24,8 @@ public class GetAllTest extends TestCase {
 	public void getAll() {
 		try {
 			ParkingRepository repo = new ParkingRepository(1);
-			repo.add(new Parking("1"));
-			List<Parking> list = repo.getAll();
+			repo.add(new ParkingEntity("1"));
+			List<ParkingEntity> list = repo.getAll();
 			assertTrue(list.size() == 1);
 		} catch (Exception e) {
 			e.printStackTrace();

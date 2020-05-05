@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import com.dkatalis.parkinglot.entity.Parking;
+import com.dkatalis.parkinglot.entity.ParkingEntity;
 
-public class ParkingRepository extends Repository<Parking> {
+public class ParkingRepository extends Repository<ParkingEntity> {
 
-	private LinkedHashMap<Integer, Parking> data;
+	private LinkedHashMap<Integer, ParkingEntity> data;
 
 	public ParkingRepository() {
-		data = new LinkedHashMap<Integer, Parking>();
+		data = new LinkedHashMap<Integer, ParkingEntity>();
 	}
 
 	public ParkingRepository(int capacity) {
-		data = new LinkedHashMap<Integer, Parking>();
+		data = new LinkedHashMap<Integer, ParkingEntity>();
 		resize(capacity);
 	}
 
@@ -34,7 +34,7 @@ public class ParkingRepository extends Repository<Parking> {
 	}
 
 	@Override
-	public Parking add(Parking item) throws Exception {
+	public ParkingEntity add(ParkingEntity item) throws Exception {
 		// check if data exists
 		int id = getIdByRegistrationNo(item.getRegistrationNo());
 		// add if empty
@@ -52,11 +52,11 @@ public class ParkingRepository extends Repository<Parking> {
 		}
 	}
 
-	public Parking deleteByRegistrationNo(String registrationNo) throws Exception {
+	public ParkingEntity deleteByRegistrationNo(String registrationNo) throws Exception {
 		int id = getIdByRegistrationNo(registrationNo);
 		// delete if exists
 		if (id > 0) {
-			Parking item = data.get(id);
+			ParkingEntity item = data.get(id);
 			data.remove(id);
 			return item;
 		} else {
@@ -65,12 +65,12 @@ public class ParkingRepository extends Repository<Parking> {
 	}
 
 	@Override
-	public List<Parking> getAll() {
+	public List<ParkingEntity> getAll() {
 		return data.entrySet().stream().map(m -> m.getValue()).collect(Collectors.toList());
 	}
 
 	private int getEmptySlot() {
-		for (Entry<Integer, Parking> set : data.entrySet()) {
+		for (Entry<Integer, ParkingEntity> set : data.entrySet()) {
 			if (set.getValue() == null) {
 				return set.getKey();
 			}
@@ -79,7 +79,7 @@ public class ParkingRepository extends Repository<Parking> {
 	}
 
 	private int getIdByRegistrationNo(String registrationNo) {
-		for (Entry<Integer, Parking> set : data.entrySet()) {
+		for (Entry<Integer, ParkingEntity> set : data.entrySet()) {
 			if (set.getValue() != null) {
 				if (set.getValue().getRegistrationNo().equals(registrationNo)) {
 					return set.getKey();

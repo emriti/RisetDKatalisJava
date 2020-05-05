@@ -1,18 +1,18 @@
 package com.dkatalis.parkinglot.entity;
 
-public class Parking {
+public class ParkingEntity {
 	private int slotNo;
 	private String registrationNo;
 
-	public Parking() {
+	public ParkingEntity() {
 		
 	}
 	
-	public Parking(String registrationNo) {
+	public ParkingEntity(String registrationNo) {
 		this.registrationNo = registrationNo;
 	}
 	
-	public Parking(int slotNo, String registrationNo) {
+	public ParkingEntity(int slotNo, String registrationNo) {
 		this.slotNo = slotNo;
 		this.registrationNo = registrationNo;
 	}

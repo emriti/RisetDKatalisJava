@@ -1,6 +1,6 @@
 package com.dkatalis.parkinglot.parkingrepository;
 
-import com.dkatalis.parkinglot.entity.Parking;
+import com.dkatalis.parkinglot.entity.ParkingEntity;
 import com.dkatalis.parkinglot.repository.ParkingRepository;
 
 import junit.framework.Test;
@@ -25,8 +25,8 @@ public class AddTest extends TestCase {
 		String msg = "";
 		try {
 			ParkingRepository repo = new ParkingRepository(2);
-			repo.add(new Parking("1"));
-			repo.add(new Parking("1"));
+			repo.add(new ParkingEntity("1"));
+			repo.add(new ParkingEntity("1"));
 		} catch (Exception e) {
 			msg = e.getMessage();
 		}
@@ -37,8 +37,8 @@ public class AddTest extends TestCase {
 		String msg = "";
 		try {
 			ParkingRepository repo = new ParkingRepository(1);
-			repo.add(new Parking("1"));
-			repo.add(new Parking("2"));
+			repo.add(new ParkingEntity("1"));
+			repo.add(new ParkingEntity("2"));
 		} catch (Exception e) {
 			msg = e.getMessage();
 		}
@@ -48,7 +48,7 @@ public class AddTest extends TestCase {
 	public void dataSaved() {
 		try {
 			ParkingRepository repo = new ParkingRepository(1);
-			Parking savedData = repo.add(new Parking("1"));
+			ParkingEntity savedData = repo.add(new ParkingEntity("1"));
 			assertTrue(savedData.getRegistrationNo().equals("1"));
 		} catch (Exception e) {
 			e.printStackTrace();
