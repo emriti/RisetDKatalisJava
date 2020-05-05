@@ -12,11 +12,6 @@ public class ParkingEntity {
 		this.registrationNo = registrationNo;
 	}
 	
-	public ParkingEntity(int slotNo, String registrationNo) {
-		this.slotNo = slotNo;
-		this.registrationNo = registrationNo;
-	}
-	
 	public int getSlotNo() {
 		return slotNo;
 	}
