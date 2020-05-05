@@ -4,6 +4,19 @@ public class Parking {
 	private int slotNo;
 	private String registrationNo;
 
+	public Parking() {
+		
+	}
+	
+	public Parking(String registrationNo) {
+		this.registrationNo = registrationNo;
+	}
+	
+	public Parking(int slotNo, String registrationNo) {
+		this.slotNo = slotNo;
+		this.registrationNo = registrationNo;
+	}
+	
 	public int getSlotNo() {
 		return slotNo;
 	}

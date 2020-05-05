@@ -3,7 +3,7 @@ package com.dkatalis.parkinglot.repository;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.dkatalis.parkinglot.entity.Parking;
 
@@ -15,15 +15,12 @@ public class ParkingRepository extends Repository<Parking> {
 		data = new LinkedHashMap<Integer, Parking>();
 	}
 
-	private int getEmptySlot() {
-		Optional<Entry<Integer, Parking>> tmp = data.entrySet().stream().filter(p -> p.getValue().equals(null))
-				.findFirst();
-		if (tmp != null) {
-			return tmp.get().getKey();
-		}
-		return -1;
+	public ParkingRepository(int capacity) {
+		data = new LinkedHashMap<Integer, Parking>();
+		resize(capacity);
 	}
-	
+
+	@Override
 	public void resize(int capacity) {
 		if (!data.isEmpty() && capacity < data.size()) {
 			for (int i = capacity + 1; i <= data.size(); i++) {
@@ -37,29 +34,58 @@ public class ParkingRepository extends Repository<Parking> {
 	}
 
 	@Override
-	public void add(Parking item) {
-		Optional<Entry<Integer, Parking>> tmp = data.entrySet().stream().filter(p -> p.getValue().getRegistrationNo().equals(item.getRegistrationNo())).findFirst();
+	public Parking add(Parking item) throws Exception {
+		// check if data exists
+		int id = getIdByRegistrationNo(item.getRegistrationNo());
 		// add if empty
-		if (tmp.equals(null)) {
+		if (id == -1) {
 			int emptySlot = getEmptySlot();
-			item.setSlotNo(emptySlot);
-			data.put(emptySlot, item);	
+			if (emptySlot > 0) {
+				item.setSlotNo(emptySlot);
+				data.put(emptySlot, item);
+				return item;
+			} else {
+				throw new Exception("Sorry, parking lot is full");	
+			}
+		} else {
+			throw new Exception("Data has already exists!");
+		}
+	}
+
+	public Parking deleteByRegistrationNo(String registrationNo) throws Exception {
+		int id = getIdByRegistrationNo(registrationNo);
+		// delete if exists
+		if (id > 0) {
+			Parking item = data.get(id);
+			data.remove(id);
+			return item;
+		} else {
+			throw new Exception("Data not found!");
 		}
 	}
 
 	@Override
-	public void deleteByKey(Integer key) {
-		Optional<Entry<Integer, Parking>> tmp = data.entrySet().stream().filter(p -> p.getValue().getRegistrationNo().equals(key)).findFirst();
-		// delete if exists
-		if (tmp.equals(null)) {
-			data.remove(tmp.get().getKey());
-		}	
-	}
-
-	@Override
 	public List<Parking> getAll() {
-		return (List<Parking>) data.values();
+		return data.entrySet().stream().map(m -> m.getValue()).collect(Collectors.toList());
 	}
 
-	
+	private int getEmptySlot() {
+		for (Entry<Integer, Parking> set : data.entrySet()) {
+			if (set.getValue() == null) {
+				return set.getKey();
+			}
+		}
+		return -1;
+	}
+
+	private int getIdByRegistrationNo(String registrationNo) {
+		for (Entry<Integer, Parking> set : data.entrySet()) {
+			if (set.getValue() != null) {
+				if (set.getValue().getRegistrationNo().equals(registrationNo)) {
+					return set.getKey();
+				}
+			}
+		}
+		return -1;
+	}
 }
