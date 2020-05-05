@@ -3,8 +3,6 @@ package com.dkatalis.parkinglot.repository;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.dkatalis.parkinglot.entity.ParkingEntity;
-
 public abstract class Repository<T> {
 	
 	@SuppressWarnings("unused")
