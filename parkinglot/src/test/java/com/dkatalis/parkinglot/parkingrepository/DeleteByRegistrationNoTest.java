@@ -35,7 +35,7 @@ public class DeleteByRegistrationNoTest extends TestCase {
 		try {
 			ParkingRepository repo = new ParkingRepository(1);
 			repo.add(new Parking("1"));
-			Parking savedData = repo.delete(new Parking("1"));
+			Parking savedData = repo.deleteByRegistrationNo("1");
 			assertTrue(savedData.getRegistrationNo().equals("1"));
 		} catch (Exception e) {
 			e.printStackTrace();

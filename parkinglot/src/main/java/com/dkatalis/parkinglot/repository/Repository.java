@@ -10,26 +10,22 @@ public abstract class Repository<T> {
 	@SuppressWarnings("unused")
 	private LinkedHashMap<Integer, T> data;
 	
-	public Repository() {
+	protected Repository() {
 		data = new LinkedHashMap<Integer, T>();
 	}
 	
-	public void resize(int capacity) {
+	protected void resize(int capacity) {
 	}
 	
-	public T add(T item) throws Exception {
+	protected T add(T item) throws Exception {
 		return item;
 	}
 	
-	public T delete(T item) throws Exception {
+	protected T delete(T item) throws Exception {
 		return item;
 	}
 	
-	public void deleteByKey(Integer key) {
-		
-	}
-	
-	public List<T> getAll() {
+	protected List<T> getAll() {
 		return null;
 	}
 
