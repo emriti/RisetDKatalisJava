@@ -1,4 +1,4 @@
-package com.dkatalis.parkinglot.parkingrepository;
+package com.dkatalis.parkinglot.test.parkingrepository;
 
 import java.util.List;
 

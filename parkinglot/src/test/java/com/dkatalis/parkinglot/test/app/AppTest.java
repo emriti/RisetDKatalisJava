@@ -1,4 +1,4 @@
-package com.dkatalis.parkinglot;
+package com.dkatalis.parkinglot.test.app;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

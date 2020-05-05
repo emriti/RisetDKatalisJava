@@ -47,7 +47,7 @@ public class ParkingService {
 		return repo.getAll();
 	}
 
-	private int calculateCharge(int hours) {
+	public int calculateCharge(int hours) {
 		int charge = 0;
 		if (hours > 0 && hours <= 2 ) {
 			charge = 10;
