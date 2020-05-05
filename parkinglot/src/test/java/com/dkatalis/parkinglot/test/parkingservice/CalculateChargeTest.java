@@ -1,9 +1,6 @@
 package com.dkatalis.parkinglot.test.parkingservice;
 
-import com.dkatalis.parkinglot.entity.ParkingEntity;
-import com.dkatalis.parkinglot.repository.ParkingRepository;
 import com.dkatalis.parkinglot.service.ParkingService;
-import com.dkatalis.parkinglot.test.parkingrepository.AddTest;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
