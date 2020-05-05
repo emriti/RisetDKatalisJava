@@ -1,10 +1,30 @@
 package com.dkatalis.parkinglot.repository;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
-public interface Repository<T> {
-	void initialize(int capacity);
-	void add(T item);
-	void delete(T item);
-	List<T> getAll();
+public abstract class Repository<T> {
+	
+	private LinkedHashMap<Integer, T> data;
+	
+	public Repository() {
+		data = new LinkedHashMap<Integer, T>();
+	}
+	
+	public void resize(int capacity) {
+	}
+	
+	public void add(T item) {
+	}
+	
+	public void delete(T item) {
+	}
+	
+	public void deleteByKey(Integer key) {
+		
+	}
+	
+	public List<T> getAll() {
+		return null;
+	}
 }
