@@ -45,28 +45,32 @@ public class GenerateParametersErrorTest extends TestCase {
 		String command = "create_parking_lot";
 		App.runningApp(command);
 		String output = outContent.toString();
-		assertTrue(output.equals(String.format("Parameters error!\r\nSee %s --help\n\r\n", command)));
+		assertTrue(output.equals(String.format("Parameters error!" + System.getProperty("line.separator")
+				+ "See %s --help" + System.getProperty("line.separator"), command)));
 	}
 
 	public void testGenerateCommandPark() {
 		String command = "park";
 		App.runningApp(command);
 		String output = outContent.toString();
-		assertTrue(output.equals(String.format("Parameters error!\r\nSee %s --help\n\r\n", command)));
+		assertTrue(output.equals(String.format("Parameters error!" + System.getProperty("line.separator")
+				+ "See %s --help" + System.getProperty("line.separator"), command)));
 	}
-	
+
 	public void testGenerateCommandLeave() {
 		String command = "leave";
 		App.runningApp(command);
 		String output = outContent.toString();
-		assertTrue(output.equals(String.format("Parameters error!\r\nSee %s --help\n\r\n", command)));
+		assertTrue(output.equals(String.format("Parameters error!" + System.getProperty("line.separator")
+				+ "See %s --help" + System.getProperty("line.separator"), command)));
 	}
-	
+
 	public void testGenerateCommandStatus() {
 		String command = "status";
 		App.runningApp(command + " 1");
 		String output = outContent.toString();
-		assertTrue(output.equals(String.format("Parameters error!\r\nSee %s --help\n\r\n", command)));
+		assertTrue(output.equals(String.format("Parameters error!" + System.getProperty("line.separator")
+				+ "See %s --help" + System.getProperty("line.separator"), command)));
 	}
-	
+
 }

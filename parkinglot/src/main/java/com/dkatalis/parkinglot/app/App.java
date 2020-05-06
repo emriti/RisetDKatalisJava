@@ -49,7 +49,7 @@ public class App {
 	}
 
 	public static void runningApp(String input) {
-		if (input.strip() != "") {
+		if (input.trim() != "") {
 
 			String[] inputs = input.split(" ");
 
@@ -164,12 +164,12 @@ public class App {
 
 	private static void GenerateParametersError(String command) {
 		System.out.println("Parameters error!");
-		System.out.println(String.format("See %s --help\n", command));
+		System.out.println(String.format("See %s --help", command));
 	}
 
 	private static void GenerateCommandError() {
 		System.out.println("Command not found!");
-		System.out.println(String.format("See help\n"));
+		System.out.println(String.format("See help"));
 	}
 
 	private static void GenerateHelp(String command) {
@@ -191,7 +191,7 @@ public class App {
 			result = "commands available: create_parking_lot, park, leave, status";
 			break;
 		}
-		System.out.println(String.format("%s\n", result));
+		System.out.println(String.format("%s", result));
 	}
 
 }

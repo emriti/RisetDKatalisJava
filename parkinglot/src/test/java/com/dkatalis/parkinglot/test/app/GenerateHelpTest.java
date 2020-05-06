@@ -46,35 +46,35 @@ public class GenerateHelpTest extends TestCase {
 		String command = "create_parking_lot --help";
 		App.runningApp(command);
 		String output = outContent.toString();
-		assertTrue(output.equals("create_parking_lot [capacity]\n\r\n"));
+		assertTrue(output.equals("create_parking_lot [capacity]" + System.getProperty("line.separator")));
 	}
 
 	public void testGenerateCommandPark() {
 		String command = "park --help";
 		App.runningApp(command);
 		String output = outContent.toString();
-		assertTrue(output.equals("park [registration no]\n\r\n"));
+		assertTrue(output.equals("park [registration no]" + System.getProperty("line.separator")));
 	}
 
 	public void testGenerateCommandLeave() {
 		String command = "leave --help";
 		App.runningApp(command);
 		String output = outContent.toString();
-		assertTrue(output.equals("leave [slot no] [hours]\n\r\n"));
+		assertTrue(output.equals("leave [slot no] [hours]" + System.getProperty("line.separator")));
 	}
 
 	public void testGenerateCommandStatus() {
 		String command = "status --help";
 		App.runningApp(command);
 		String output = outContent.toString();
-		assertTrue(output.equals("status\n\r\n"));
+		assertTrue(output.equals("status" + System.getProperty("line.separator")));
 	}
 
 	public void testGenerateCommandAll() {
 		String command = "help";
 		App.runningApp(command);
 		String output = outContent.toString();
-		assertTrue(output.equals("commands available: create_parking_lot, park, leave, status\n\r\n"));
+		assertTrue(output.equals("commands available: create_parking_lot, park, leave, status" + System.getProperty("line.separator")));
 	}
 	
 }

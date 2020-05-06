@@ -22,7 +22,6 @@ public class RunningAppTest extends TestCase {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
-		suite.addTest(new RunningAppTest("runningAppInputEmptyString"));
 		suite.addTest(new RunningAppTest("createParkingLotErrorInputNonNumber"));
 		suite.addTest(new RunningAppTest("successfullyCreatedParkingLot"));
 		suite.addTest(new RunningAppTest("generateStatusDataNA"));
@@ -33,7 +32,7 @@ public class RunningAppTest extends TestCase {
 		suite.addTest(new RunningAppTest("leaveErrorInputNonNumber"));
 		suite.addTest(new RunningAppTest("leaveErrorDataNotFound"));
 		suite.addTest(new RunningAppTest("successfullyLeaved"));
-		
+
 		return suite;
 	}
 
@@ -49,73 +48,71 @@ public class RunningAppTest extends TestCase {
 		System.setErr(new PrintStream(errContent));
 	}
 
-	public void runningAppInputEmptyString() {
-		App.runningApp(" ");
-		String output = outContent.toString();
-		assertTrue(output.equals("Command not found!\r\nSee help\n\r\n"));
-	}
-	
 	public void createParkingLotErrorInputNonNumber() {
 		String command = "create_parking_lot";
 		App.runningApp(command + " abc");
 		String output = outContent.toString();
-		assertTrue(output.equals(String.format("Parameters error!\r\nSee %s --help\n\r\n", command)));
+		assertTrue(output.equals(String.format("Parameters error!" + System.getProperty("line.separator")
+				+ "See %s --help" + System.getProperty("line.separator"), command)));
 	}
 
 	public void successfullyCreatedParkingLot() {
 		App.runningApp("create_parking_lot 1");
 		String output = outContent.toString();
-		assertTrue(output.equals("Created parking lot with 1 slots\r\n"));
+		assertTrue(output.equals("Created parking lot with 1 slots" + System.getProperty("line.separator")));
 	}
-	
+
 	public void generateStatusDataNA() {
 		App.runningApp("status");
 		String output = outContent.toString();
-		assertTrue(output.equals("Slot No.\tRegistration No\r\n"));
+		assertTrue(output.equals("Slot No.\tRegistration No" + System.getProperty("line.separator")));
 	}
-	
+
 	public void successfullyParked() {
 		String command = "park 1";
 		App.runningApp(command);
 		String output = outContent.toString();
-		assertTrue(output.equals("Allocated slot number: 1\r\n"));
+		assertTrue(output.equals("Allocated slot number: 1" + System.getProperty("line.separator")));
 	}
-	
+
 	public void failedToParkDataExists() {
 		App.runningApp("park 1");
 		String output = outContent.toString();
-		assertTrue(output.equals("Data has already exists!\r\n"));
+		assertTrue(output.equals("Data has already exists!" + System.getProperty("line.separator")));
 	}
-	
+
 	public void failedToParkParkingFull() {
 		App.runningApp("park 2");
 		String output = outContent.toString();
-		assertTrue(output.equals("Sorry, parking lot is full\r\n"));
+		assertTrue(output.equals("Sorry, parking lot is full" + System.getProperty("line.separator")));
 	}
-	
+
 	public void generateStatusDataExists() {
 		App.runningApp("status");
 		String output = outContent.toString();
-		assertTrue(output.equals("Slot No.\tRegistration No\r\n1\t\t1\r\n"));
+		assertTrue(output.equals("Slot No.\tRegistration No" + System.getProperty("line.separator") + "1\t\t1"
+				+ System.getProperty("line.separator")));
 	}
 
 	public void leaveErrorInputNonNumber() {
 		String command = "leave";
 		App.runningApp(command + " 1 abc");
 		String output = outContent.toString();
-		assertTrue(output.equals(String.format("Parameters error!\r\nSee %s --help\n\r\n", command)));
+		assertTrue(output.equals(String.format("Parameters error!" + System.getProperty("line.separator")
+				+ "See %s --help" + System.getProperty("line.separator"), command)));
 	}
 
 	public void leaveErrorDataNotFound() {
 		App.runningApp("leave 2 1");
 		String output = outContent.toString();
-		assertTrue(output.equals("Registration number 2 not found\r\n"));
+		assertTrue(output.equals("Registration number 2 not found" + System.getProperty("line.separator")));
 	}
-	
+
 	public void successfullyLeaved() {
 		App.runningApp("leave 1 1");
 		String output = outContent.toString();
-		assertTrue(output.equals("Registration number 1 with Slot Number 1 is free with Charge 10\r\n"));
+		assertTrue(output.equals("Registration number 1 with Slot Number 1 is free with Charge 10"
+				+ System.getProperty("line.separator")));
 	}
-	
+
 }
