@@ -17,25 +17,6 @@ public class App {
 
 	public static void main(String[] args) {
 		run(args);
-//		runningApp("park --help");
-//		runningApp("create_parking_lot 6");
-//		runningApp("park KA-01-HH-1234");
-//		runningApp("park KA-01-HH-9999");
-//		runningApp("park KA-01-BB-0001");
-//		runningApp("park KA-01-HH-7777");
-//		runningApp("park KA-01-HH-2701");
-//		runningApp("park KA-01-HH-3141");
-//		runningApp("leave KA-01-HH-3141 4");
-//		runningApp("status");
-//		runningApp("park KA-01-P-333");
-//		runningApp("park DL-12-AA-9999");
-//		runningApp("leave KA-01-HH-1234 4");
-//		runningApp("leave KA-01-BB-0001 6");
-//		runningApp("leave DL-12-AA-9999 2");
-//		runningApp("park KA-09-HH-0987");
-//		runningApp("park CA-09-IO-1111");
-//		runningApp("park KA-09-HH-0123");
-//		runningApp("status");
 	}
 
 	private static void run(String[] args) {
@@ -67,8 +48,8 @@ public class App {
 
 	}
 
-	private static void runningApp(String input) {
-		if (input.trim() != "") {
+	public static void runningApp(String input) {
+		if (input.strip() != "") {
 
 			String[] inputs = input.split(" ");
 
